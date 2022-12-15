@@ -90,7 +90,6 @@ export const EquipmentProvider = ({ children }: IEquipmentProvider) => {
     api.delete(`/equipments/${equipmentId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    window.location.reload()
   };
 
   const updateEquipment= (equipmentId: number, data: IEquipmentUpdate) => {
