@@ -47,11 +47,11 @@ const CreatEquipment = () => {
       code: code
     };
 
+    createEquipment(data);
+
     navigate("/equipments", {
       state: -1,
     });
-
-    createEquipment(data);
   };
 
   return (
