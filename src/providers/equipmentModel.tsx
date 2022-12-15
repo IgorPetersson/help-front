@@ -108,7 +108,11 @@ export const EquipmentModelProvider = ({
   ) => {
     api.patch(`/models/${equipmentModelId}`, data, {
       headers: { Authorization: `Bearer ${token}` },
-    }).then((x) => console.log("Models -> ", x.data));
+    }).then((res) => {
+      const x = equipmentModels.filter((em) => em.id != equipmentModelId)
+      x.push(res.data)
+      setEquipmentModels(x)
+    });
   };
 
   return (

@@ -102,7 +102,7 @@ const LandingPageModelEquipment = () => {
                   <th>Ações</th>
                 </tr>
               </thead>
-              {showModels.map((equipment, index) => (
+              {showModels.sort((a, b) => b.id - a.id).map((equipment, index) => (
                 <tbody>
                   <tr key={equipment.id}>
                     <td>{++index}</td>
