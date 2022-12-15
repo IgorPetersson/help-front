@@ -1,5 +1,5 @@
 //import { Axios } from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { HeaderAdmin } from "../../components/HeaderAdmin";
 import { Footer } from "../../components/Footer";
@@ -10,7 +10,7 @@ import { AuthContext } from "../../providers/user";
 
 const CreatEquipment = () => {
   const { equipments, createEquipment } = useContext(EquipmentContext);
-  const { equipmentModels } = useContext(EquipmentModelContext);
+  const { equipmentModels, listEquipmentModels } = useContext(EquipmentModelContext);
 
   const { isLogged } = useContext(AuthContext);
 
@@ -21,6 +21,10 @@ const CreatEquipment = () => {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user") || "{admin: false, email: ''}")
+
+  useEffect(() => {
+    listEquipmentModels()
+  },[])
 
   if (user.admin == false  ){
     if(user.email != ""){
