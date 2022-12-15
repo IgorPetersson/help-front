@@ -164,7 +164,7 @@ const LandPageAdmin = () => {
                       <th>Ações</th>
                     </tr>
                   </thead>
-                  {callsShow.map((ticket, index) => (
+                  {callsShow.sort((a, b) => b.id - a.id).map((ticket, index) => (
                     <tbody>
                       <tr key={ticket.id}>
                         <td>{++index}</td>
