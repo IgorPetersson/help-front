@@ -1,0 +1,33 @@
+.entry-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show-box {
+    padding: 4rem 2rem;
+    margin-bottom: 3rem;
+    background-color: var(--bs-light);
+    border-radius: .3rem;
+   box-shadow: 0px 0px 15px -5px black;
+}
+
+.show-box2 {
+    height: 80vh;
+    padding: 4rem 2rem;
+    margin-bottom: 3rem;
+    background-color: var(--bs-light);
+    border-radius: .3rem;
+   box-shadow: 0px 0px 15px -5px black;
+}
+.form-box {
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 4rem 2rem;
+    margin-bottom: 3rem;
+    background-color: var(--bs-light);
+    border-radius: .3rem;
+   box-shadow: 0px 0px 15px -5px black;
+}

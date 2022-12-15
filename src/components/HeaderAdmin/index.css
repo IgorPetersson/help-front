@@ -1,0 +1,37 @@
+.div-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
+@media (min-width:600px){
+    .nav-tags {
+        display: flex;
+        flex-direction: row;
+        padding-left: 180px;
+    }
+
+    .nav-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding-right: 200px;
+    }
+
+    .div-container{
+        display: flex;
+        width: 100%;
+    }
+
+
+    
+    
+}
