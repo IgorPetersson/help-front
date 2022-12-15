@@ -42,7 +42,7 @@ export const ReportTicket = () => {
   const [show, setShow] = useState(false);
 
   const onReport = async () => {
-    if (start.length == 10 && end.length == 10 && end[2] == "/" && end[5] == "/" && start[2] == "/" && start[5] == "/") {
+    if (start.length == 10 && end.length == 10 ) {
       try{
       const initDate = start.split("/");
       const endDate = end.split("/");
