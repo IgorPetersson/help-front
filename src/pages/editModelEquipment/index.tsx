@@ -8,12 +8,19 @@ import api from "../../services/api";
 
 const EditModelEquipment = () => {
   const { id } = useParams();
-  const { equipmentModels, updateEquipmentModel,listEquipmentModels } = useContext(
-    EquipmentModelContext
-  );
+  const { equipmentModels, updateEquipmentModel, listEquipmentModels } =
+    useContext(EquipmentModelContext);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+
+  const authorizeUpdate = (): boolean => {
+    if (name == "" || description == "") {
+      return false;
+    }
+
+    return true;
+  };
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -23,10 +30,12 @@ const EditModelEquipment = () => {
       name: name,
     };
 
-    updateEquipmentModel(parseInt(id as string), data);
-    navigate("/modelsEquipment", {
-      state: -2,
-    });
+    if (authorizeUpdate() == true) {
+      updateEquipmentModel(parseInt(id as string), data);
+      navigate("/modelsEquipment", {
+        state: -2,
+      });
+    }
   };
 
   let token = localStorage.getItem("authToken") || "";

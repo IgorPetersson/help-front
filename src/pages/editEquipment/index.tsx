@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EquipmentContext } from "../../providers/equipment";
 
-import api  from "../../services/api";
+import api from "../../services/api";
 import { EquipmentModelContext } from "../../providers/equipmentModel";
 
 interface IEquipment {
@@ -19,40 +19,53 @@ interface IEquipment {
 const EditEquipment = () => {
   const { id } = useParams();
 
-  const { equipments, updateEquipment, getOneEquipment } = useContext(EquipmentContext);
-  const {equipmentModels, listEquipmentModels} = useContext(EquipmentModelContext)
-  const navigate = useNavigate()
+  const { equipments, updateEquipment, getOneEquipment } =
+    useContext(EquipmentContext);
+  const { equipmentModels, listEquipmentModels } = useContext(
+    EquipmentModelContext
+  );
+  const navigate = useNavigate();
 
-  const equipmentId = parseInt(id as string)
+  const equipmentId = parseInt(id as string);
   const [place, setPlace] = useState("");
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
 
+  let token = localStorage.getItem("authToken") || "";
 
-  let token = localStorage.getItem("authToken") || ""
+  const authorizeUpdate = (): boolean => {
+    if (place == "" || code == "" || name == "") {
+      return false;
+    }
+
+    return true;
+  };
 
   useEffect(() => {
-    api.get(`/equipments/${parseInt(id as string)}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then((res) => {
-      setPlace(res.data.place as string)
-      setName(res.data.name as string)
-      setCode(res.data.code as string)
-    });
-    listEquipmentModels()
+    api
+      .get(`/equipments/${parseInt(id as string)}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setPlace(res.data.place as string);
+        setName(res.data.name as string);
+        setCode(res.data.code as string);
+      });
+    listEquipmentModels();
   }, []);
 
-  const user = JSON.parse(localStorage.getItem("user") || "{admin: false, email: ''}")
+  const user = JSON.parse(
+    localStorage.getItem("user") || "{admin: false, email: ''}"
+  );
 
-  if (user.admin == false  ){
-    if(user.email != ""){
+  if (user.admin == false) {
+    if (user.email != "") {
       navigate("/tickets");
-    }else{
+    } else {
       navigate("/");
     }
-    return <></>
+    return <></>;
   }
-
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -63,10 +76,12 @@ const EditEquipment = () => {
       code: code,
     };
 
-    updateEquipment(equipmentId, data);
-    navigate("/equipments", {
-      state: -1
-    })
+    if (authorizeUpdate() == true) {
+      updateEquipment(equipmentId, data);
+      navigate("/equipments", {
+        state: -1,
+      });
+    }
   };
 
   return (
@@ -78,13 +93,16 @@ const EditEquipment = () => {
       <main className="main">
         <div className="form-box p-5">
           <Form autoComplete="off">
-            <h1 className="text-center w-100, fs-3 fw-normal"> Editar Equipamento</h1>
+            <h1 className="text-center w-100, fs-3 fw-normal">
+              {" "}
+              Editar Equipamento
+            </h1>
             <br />
 
             <Form.Group className="mb-3" as={Row}>
               <Form.Label>Modelo do Equipamento:</Form.Label>
               <Col sm={12}>
-              <Form.Control
+                <Form.Control
                   as="select"
                   name="nameModel"
                   placeholder="Modelo"
