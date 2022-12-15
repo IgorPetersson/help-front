@@ -85,6 +85,7 @@ export const EquipmentModelProvider = ({
       headers: { Authorization: `Bearer ${token}` },
     }).then((res) => {
       const x = JSON.parse(JSON.stringify(equipmentModels))
+      console.log("X -> ", x)
       x.push(res.data)
       setEquipmentModels(x)
     }) ;

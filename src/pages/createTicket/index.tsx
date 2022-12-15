@@ -48,6 +48,13 @@ const CreateTicket = () => {
     listEquipments();
   }, []);
 
+  const authorizeCreate = (): boolean => {
+    if(description == "" || responsibleLocale == "" || subject == "" || equipment == ""  || nameModel == "" || place == ""){
+      return false
+    }
+    return true
+  }
+
   const navigate = useNavigate();
 
   const user = JSON.parse(
