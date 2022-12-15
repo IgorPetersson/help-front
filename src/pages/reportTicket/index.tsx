@@ -49,12 +49,12 @@ export const ReportTicket = () => {
 
       const iDate = new Date(
         parseInt(initDate[2]),
-        parseInt(initDate[1]),
+        parseInt(initDate[1]-1),
         parseInt(initDate[0])
       ).toLocaleDateString("en-CA");
       const eDate = new Date(
         parseInt(endDate[2]),
-        parseInt(endDate[1]),
+        parseInt(endDate[1])-1,
         parseInt(endDate[0])
       ).toLocaleDateString("en-CA");
 
