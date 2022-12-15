@@ -53,8 +53,6 @@ const LandingPagecall = () => {
 
   const resolveCall = (id: number) => {
     updateCall(id)
-    const newCalls = calls.filter((call) => call.id != id)
-    setCalls([])
     window.location.reload()
   }
 
