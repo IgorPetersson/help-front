@@ -58,11 +58,12 @@ export const ReportTicket = () => {
         parseInt(endDate[0])
       ).toLocaleDateString("en-CA");
 
-      console.log("I -> ", iDate)
-      console.log("E -> ", eDate)
-
       const xDate = new Date(eDate)
       xDate.setDate(xDate.getDate() + 1)
+
+      
+      console.log("I -> ", iDate)
+      console.log("E -> ", xDate.toLocaleDateString("en-CA"))
 
       const result = await createReport(iDate, xDate.toLocaleDateString("en-CA"));
       setReports(result);
