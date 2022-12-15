@@ -25,10 +25,10 @@ const EditModelEquipment = () => {
     };
 
     updateEquipmentModel(parseInt(id as string), data);
-    window.location.reload()
     navigate("/admin", {
       state: -1
     })
+    window.location.reload()
   };
 
   let token = localStorage.getItem("authToken") || "";
