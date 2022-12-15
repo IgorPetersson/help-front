@@ -28,6 +28,7 @@ interface IUserLogged {
   email: string;
   id: number;
   lastName: string;
+  admin: boolean
 }
 
 const LandingPageTicket = () => {
@@ -37,13 +38,23 @@ const LandingPageTicket = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate()
 
+  const user: IUserLogged = JSON.parse(localStorage.getItem("user") || "{admin: true, email: ''}");
+
+  if (user.admin == true  ){
+    if(user.email != ""){
+      navigate("/admin");
+    }else{
+      navigate("/");
+    }
+    return <></>
+  }
+
 
   useEffect(() => {
     listCall();
   }, []);
 
-  const user: IUserLogged = JSON.parse(localStorage.getItem("user") || "{}");
-
+  
   const filterContent = (x: ICall[], searchTerm: string) => {
     const result = x.filter((call) =>
       call.subject.toLowerCase().includes(searchTerm.toLowerCase())
