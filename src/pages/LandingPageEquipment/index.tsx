@@ -29,7 +29,7 @@ const LandingPageEquipment = () => {
 
   useEffect(() => {
     listEquipments()
-  }, [deleted])
+  }, [])
 
   const navigate = useNavigate();
 

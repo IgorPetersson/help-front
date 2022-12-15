@@ -63,7 +63,9 @@ const EditEquipment = () => {
     };
 
     updateEquipment(equipmentId, data);
-    navigate("/equipments")
+    navigate("/equipments", {
+      state: -1
+    })
   };
 
   return (

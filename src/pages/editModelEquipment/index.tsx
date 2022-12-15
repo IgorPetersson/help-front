@@ -4,17 +4,16 @@ import { HeaderAdmin } from "../../components/HeaderAdmin";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EquipmentModelContext } from "../../providers/equipmentModel";
-import api  from "../../services/api";
+import api from "../../services/api";
 
 const EditModelEquipment = () => {
   const { id } = useParams();
-  const { equipmentModels, updateEquipmentModel } = useContext(
+  const { equipmentModels, updateEquipmentModel,listEquipmentModels } = useContext(
     EquipmentModelContext
   );
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -26,8 +25,8 @@ const EditModelEquipment = () => {
 
     updateEquipmentModel(parseInt(id as string), data);
     navigate("/modelsEquipment", {
-      state: -2
-    })
+      state: -2,
+    });
   };
 
   let token = localStorage.getItem("authToken") || "";
@@ -41,19 +40,23 @@ const EditModelEquipment = () => {
         setName(res.data.name as string);
         setDescription(res.data.description as string);
       });
+
+    listEquipmentModels();
   }, []);
 
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user") || "{admin: false, email: ''}")
+  const user = JSON.parse(
+    localStorage.getItem("user") || "{admin: false, email: ''}"
+  );
 
-  if (user.admin == false  ){
-    if(user.email != ""){
+  if (user.admin == false) {
+    if (user.email != "") {
       navigate("/tickets");
-    }else{
+    } else {
       navigate("/");
     }
-    return <></>
+    return <></>;
   }
 
   return (

@@ -87,6 +87,9 @@ const CreateTicket = () => {
     setEquipment("");
 
     createCall(data);
+    navigate("/tickets", {
+      state: -1
+    })
   };
 
   return (
