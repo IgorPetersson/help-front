@@ -60,7 +60,7 @@ const defaultValus: IEquipmentContext = {
 export const EquipmentContext = createContext<IEquipmentContext>(defaultValus);
 
 export const EquipmentProvider = ({ children }: IEquipmentProvider) => {
-  const [equipments, setEquipments] = useState([]);
+  const [equipments, setEquipments] = useState<IEquipment[]>([]);
 
   let token = localStorage.getItem("authToken") || ""
 
@@ -73,7 +73,11 @@ export const EquipmentProvider = ({ children }: IEquipmentProvider) => {
   };
 
   const createEquipment = (data: IEquipmentCreate) => {
-    api.post("/equipments", data, { headers: { Authorization: `Bearer ${token}` } });
+    api.post("/equipments", data, { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
+      const x = equipments
+      x.push(res.data)
+      setEquipments(x)
+    });
   };
 
   const getOneEquipment = (equipmentId: number) => {
@@ -92,7 +96,12 @@ export const EquipmentProvider = ({ children }: IEquipmentProvider) => {
   const updateEquipment= (equipmentId: number, data: IEquipmentUpdate) => {
     api.patch(`/equipments/${equipmentId}`, data,{
       headers: { Authorization: `Bearer ${token}` },
+    }).then((res) => {
+      const x = equipments.filter((eq) => eq.id == equipmentId)
+      x.push(res.data)
+      setEquipments(x)
     });
+
   };
 
   return (

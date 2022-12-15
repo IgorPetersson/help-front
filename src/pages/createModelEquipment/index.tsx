@@ -13,6 +13,14 @@ const CreateModelEquipment = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
+  const authorizeCreate = (): boolean => {
+    if (name == "" || description == "") {
+      return false;
+    }
+
+    return true;
+  };
+
   const onSubmit = (e: any) => {
     e.preventDefault();
 
@@ -21,26 +29,30 @@ const CreateModelEquipment = () => {
       description: description,
     };
 
-    setName("")
-    setDescription("")
+    if (authorizeCreate() == true) {
+      setName("");
+      setDescription("");
 
-    createEquipmentModel(data);
-    navigate("/modelsEquipment", {
-      state: -1
-    });
+      createEquipmentModel(data);
+      navigate("/modelsEquipment", {
+        state: -1,
+      });
+    }
   };
 
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user") || "{admin: false, email: ''}")
+  const user = JSON.parse(
+    localStorage.getItem("user") || "{admin: false, email: ''}"
+  );
 
-  if (user.admin == false  ){
-    if(user.email != ""){
+  if (user.admin == false) {
+    if (user.email != "") {
       navigate("/tickets");
-    }else{
+    } else {
       navigate("/");
     }
-    return <></>
+    return <></>;
   }
 
   return (

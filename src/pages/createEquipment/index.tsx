@@ -10,7 +10,9 @@ import { AuthContext } from "../../providers/user";
 
 const CreatEquipment = () => {
   const { equipments, createEquipment } = useContext(EquipmentContext);
-  const { equipmentModels, listEquipmentModels } = useContext(EquipmentModelContext);
+  const { equipmentModels, listEquipmentModels } = useContext(
+    EquipmentModelContext
+  );
 
   const { isLogged } = useContext(AuthContext);
 
@@ -20,38 +22,52 @@ const CreatEquipment = () => {
 
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user") || "{admin: false, email: ''}")
+  const user = JSON.parse(
+    localStorage.getItem("user") || "{admin: false, email: ''}"
+  );
 
   useEffect(() => {
-    listEquipmentModels()
-  },[])
+    listEquipmentModels();
+  }, []);
 
-  if (user.admin == false  ){
-    if(user.email != ""){
+  if (user.admin == false) {
+    if (user.email != "") {
       navigate("/tickets");
-    }else{
+    } else {
       navigate("/");
     }
-    return <></>
+    return <></>;
   }
+
+  const authorizeCreate = (): boolean => {
+    if (place == "" || code == "" || equipmentModelId == "") {
+      return false;
+    }
+
+    return true;
+  };
 
   const onSubmit = (e: any) => {
     e.preventDefault();
 
-    const name = equipmentModels.filter((eq) => eq.id == parseInt(equipmentModelId))[0].name
+    const name = equipmentModels.filter(
+      (eq) => eq.id == parseInt(equipmentModelId)
+    )[0].name;
 
     const data = {
       name: name,
       place: place,
       equipmentModelId: parseInt(equipmentModelId),
-      code: code
+      code: code,
     };
 
-    createEquipment(data);
+    if (authorizeCreate() == true) {
+      createEquipment(data);
 
-    navigate("/equipments", {
-      state: -1,
-    });
+      navigate("/equipments", {
+        state: -1,
+      });
+    }
   };
 
   return (
