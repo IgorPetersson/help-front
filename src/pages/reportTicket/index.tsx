@@ -62,7 +62,7 @@ export const ReportTicket = () => {
       console.log("E -> ", eDate)
 
       const xDate = new Date(eDate)
-      xDate.setDate(xDate.getDate() - 1)
+      xDate.setDate(xDate.getDate() + 1)
 
       const result = await createReport(iDate, xDate.toLocaleDateString("en-CA"));
       setReports(result);
