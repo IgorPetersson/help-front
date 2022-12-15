@@ -13,6 +13,14 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
 
+  const authorizeRegister = () => {
+    if(firstName == "" || lastName == "" || email == "" || password == "" || phone == ""){
+      return false
+    }
+
+    return true
+  }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const data = {
@@ -23,8 +31,12 @@ const Signup = () => {
       phone: phone,
       terms_of_use: true
     }
-    signUp(data)
+    if(authorizeRegister() == true){
+      signUp(data)
+    }
   };
+
+
 
   return (
     <div className={styles.signup_container}>

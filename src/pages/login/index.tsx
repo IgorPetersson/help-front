@@ -8,7 +8,7 @@ import {
   Left,
   LoginFormContainer,
   Right,
-  WhiteBtn
+  WhiteBtn,
 } from "./styles";
 
 import { useAuth } from "../../providers/user";
@@ -23,9 +23,17 @@ const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const authorizeEmail = () => {
+    if (email == "" || password == "") {
+      return false;
+    }
+
+    return true;
+  };
+
   const { signIn, signOut, isLogged } = useAuth();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const changeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -43,7 +51,9 @@ const Login = () => {
       password: password,
     };
 
-    signIn(auth);
+    if (authorizeEmail() == true) {
+      signIn(auth);
+    }
   };
 
   return (
@@ -71,8 +81,10 @@ const Login = () => {
           </FormContainer>
         </Left>
         <Right>
-          <h1 style={{color: "white"}}>Novo Aqui?</h1>
-          <GreenBtn type="button" onClick={() => navigate("/signup")}>Registrar</GreenBtn>
+          <h1 style={{ color: "white" }}>Novo Aqui?</h1>
+          <GreenBtn type="button" onClick={() => navigate("/signup")}>
+            Registrar
+          </GreenBtn>
         </Right>
       </LoginFormContainer>
     </LoginContainer>
