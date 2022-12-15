@@ -36,7 +36,7 @@ const CreateTicket = () => {
   const [equipment, setEquipment] = useState("");
 
   const [nameModel, setNameModel] = useState("");
-  const [currentDate] = useState(new Date().toLocaleDateString("en-US"));
+  const [currentDate] = useState(new Date().toLocaleDateString("en-GB"));
   const [place, setPlace] = useState("");
 
   const userLogged = JSON.parse(
@@ -203,7 +203,7 @@ const CreateTicket = () => {
                       type="text"
                       name="title"
                       placeholder="Assunto"
-                      value={currentDate.toLocaleDateString("en-GB")}
+                      value={currentDate}
                       disabled
                     />
                   </Col>
