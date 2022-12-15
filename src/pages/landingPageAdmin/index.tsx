@@ -46,8 +46,6 @@ const LandPageAdmin = () => {
 
   const resolveCall = (id: number) => {
     updateCall(id);
-    const newCalls = calls.filter((call) => call.id != id);
-    setCalls(newCalls);
   };
 
   const callsShow = calls.filter(

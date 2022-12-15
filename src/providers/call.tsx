@@ -145,7 +145,9 @@ export const CallsProvider = ({ children }: ICallProvider) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .catch((err) => console.log("Err -> ", err));
+      .then((res) => {
+        setControl(!control)
+      });
   };
 
   const createReport = async (start: string, end: string) => {
