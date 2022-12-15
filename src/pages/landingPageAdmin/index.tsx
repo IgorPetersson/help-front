@@ -13,17 +13,12 @@ const LandPageAdmin = () => {
   const [searchEquipment, setSearchEquipment] = useState("");
   const [searchStatus, setSearchStatus] = useState("opening");
 
-
   let dateA = new Date();
   dateA.setDate(dateA.getDate() - 30);
-  
-  const [endDate, setEndDate] = useState(
-    new Date().toLocaleDateString("en-GB")
-  );
 
-  const [initDate, setInitDate] = useState(
-    dateA.toLocaleDateString("en-GB")
-  );
+  const [endDate, setEndDate] = useState(new Date());
+
+  const [initDate, setInitDate] = useState(dateA);
 
   useEffect(() => {
     listCall();
@@ -52,12 +47,10 @@ const LandPageAdmin = () => {
     (c) =>
       c.status == searchStatus &&
       c.equipmentName.toLowerCase().includes(searchEquipment.toLowerCase()) &&
-      c.subject.toLowerCase().includes(searchSubject.toLowerCase()) 
-      //&&
-      //((new Date(c.date) <= new Date(endDate) && new Date(c.date) >= new Date(initDate)) 
-      //|| (initDate == new Date(c.date).toLocaleDateString("en-CA")) && endDate == new Date(c.date).toLocaleDateString("en-CA"))
-  );
-
+      c.subject.toLowerCase().includes(searchSubject.toLowerCase()) &&
+    ((new Date(c.date) <= endDate && new Date(c.date) >= initDate))
+    || (initDate.toLocaleDateString("en-CA") == new Date(c.date).toLocaleDateString("en-CA")) && endDate.toLocaleDateString("en-CA") == new Date(c.date).toLocaleDateString("en-CA"))
+  
   return (
     <div>
       <header className="header mb-2">
@@ -111,29 +104,21 @@ const LandPageAdmin = () => {
                 <div className="col-sm-12 my-2">
                   <label htmlFor="startDate">De:</label>
                   <input
-                    value={initDate}
+                    value={initDate.toLocaleDateString("en-GB")}
                     type="text"
                     className="form-control"
                     id="startDate"
-                    onChange={(e) => {
-                      const dateError = new Date(e.target.value)
-                      dateError.setDate(dateError.getDate() + 1)
-                      setInitDate(dateError.toLocaleDateString("en-CA"))
-                    }}
+                    disabled
                   />
                 </div>
                 <div className="col-sm-12 my-2">
                   <label htmlFor="endDate">Até:</label>
                   <input
-                    value={endDate}
+                    value={endDate.toLocaleDateString("en-GB")}
                     type="text"
                     className="form-control"
                     id="endDate"
-                    onChange={(e) => {
-                      const dateError = new Date(e.target.value)
-                      dateError.setDate(dateError.getDate() + 1)
-                      setEndDate(dateError.toLocaleDateString("en-CA"))
-                    }}
+                    disabled
                   />
                 </div>
               </div>
@@ -162,41 +147,45 @@ const LandPageAdmin = () => {
                       <th>Ações</th>
                     </tr>
                   </thead>
-                  {callsShow.sort((a, b) => b.id - a.id).map((ticket, index) => (
-                    <tbody>
-                      <tr key={ticket.id}>
-                        <td>{++index}</td>
-                        <td>
-                          <a href={`/tickets/${ticket.id}`}>
+                  {callsShow
+                    .sort((a, b) => b.id - a.id)
+                    .map((ticket, index) => (
+                      <tbody>
+                        <tr key={ticket.id}>
+                          <td>{++index}</td>
+                          <td>
+                            <a href={`/tickets/${ticket.id}`}>
+                              {" "}
+                              {ticket.subject}
+                            </a>
+                          </td>
+                          <td>{ticket.equipmentName}</td>
+                          <td>
                             {" "}
-                            {ticket.subject}
-                          </a>
-                        </td>
-                        <td>{ticket.equipmentName}</td>
-                        <td>
-                          {" "}
-                          {ticket.date &&
-                            new Date(ticket.date).toLocaleDateString()}
-                        </td>
-                        <td>
-                          {ticket.status == "opening"
-                            ? "Chamado Aberto"
-                            : "Chamado Encerrado"}
-                        </td>
+                            {ticket.date &&
+                              new Date(ticket.date).toLocaleDateString()}
+                          </td>
+                          <td>
+                            {ticket.status == "opening"
+                              ? "Chamado Aberto"
+                              : "Chamado Encerrado"}
+                          </td>
 
-                        <td>
-                          &nbsp;
-                          <Button
-                            className="btn-warming"
-                            onClick={() => resolveCall(ticket.id)}
-                            disabled={ticket.status == "opening" ? false: true}
-                          >
-                            &nbsp; Encerrar Chamado
-                          </Button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  ))}
+                          <td>
+                            &nbsp;
+                            <Button
+                              className="btn-warming"
+                              onClick={() => resolveCall(ticket.id)}
+                              disabled={
+                                ticket.status == "opening" ? false : true
+                              }
+                            >
+                              &nbsp; Encerrar Chamado
+                            </Button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    ))}
                 </Table>
               </div>
             </Col>
