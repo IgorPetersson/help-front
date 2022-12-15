@@ -80,10 +80,6 @@ export const EquipmentModelProvider = ({
       });
   };
 
-  useEffect(() => {
-    listEquipmentModels();
-  }, [equipmentModels]);
-
   const createEquipmentModel = (data: IEquipmentModelCreate) => {
     api.post("/models", data, {
       headers: { Authorization: `Bearer ${token}` },
