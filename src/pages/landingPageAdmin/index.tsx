@@ -55,9 +55,10 @@ const LandPageAdmin = () => {
     (c) =>
       c.status == searchStatus &&
       c.equipmentName.toLowerCase().includes(searchEquipment.toLowerCase()) &&
-      c.subject.toLowerCase().includes(searchSubject.toLowerCase()) &&
-      ((new Date(c.date) <= new Date(endDate) && new Date(c.date) >= new Date(initDate)) 
-      || (initDate == new Date(c.date).toLocaleDateString("en-CA")) && endDate == new Date(c.date).toLocaleDateString("en-CA"))
+      c.subject.toLowerCase().includes(searchSubject.toLowerCase()) 
+      //&&
+      //((new Date(c.date) <= new Date(endDate) && new Date(c.date) >= new Date(initDate)) 
+      //|| (initDate == new Date(c.date).toLocaleDateString("en-CA")) && endDate == new Date(c.date).toLocaleDateString("en-CA"))
   );
 
   return (
