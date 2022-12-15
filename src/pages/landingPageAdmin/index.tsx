@@ -48,7 +48,6 @@ const LandPageAdmin = () => {
     updateCall(id);
     const newCalls = calls.filter((call) => call.id != id);
     setCalls(newCalls);
-    window.location.reload()
   };
 
   const callsShow = calls.filter(
