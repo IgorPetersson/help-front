@@ -38,6 +38,10 @@ const LandingPageTicket = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate()
 
+  useEffect(() => {
+    listCall();
+  }, []);
+
   const user: IUserLogged = JSON.parse(localStorage.getItem("user") || "{admin: true, email: ''}");
 
   if (user.admin == true  ){
@@ -48,11 +52,6 @@ const LandingPageTicket = () => {
     }
     return <></>
   }
-
-
-  useEffect(() => {
-    listCall();
-  }, []);
 
   
   const filterContent = (x: ICall[], searchTerm: string) => {
