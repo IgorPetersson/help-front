@@ -64,6 +64,7 @@ export const EquipmentModelProvider = ({
   children,
 }: IEquipmentModelProvider) => {
   const [equipmentModels, setEquipmentModels] = useState<IEquipmentModel[]>([]);
+  const [control, setControl] = useState(false)
 
   let token = "";
   if (typeof window !== "undefined") {
@@ -82,7 +83,7 @@ export const EquipmentModelProvider = ({
 
   useEffect(() => {
     listEquipmentModels()
-  },[])
+  },[control])
 
   const createEquipmentModel = (data: IEquipmentModelCreate) => {
     api.post("/models", data, {
@@ -92,6 +93,7 @@ export const EquipmentModelProvider = ({
       console.log("X -> ", x)
       x.push(res.data)
       setEquipmentModels(x)
+      setControl(!control)
     }) ;
   };
 
