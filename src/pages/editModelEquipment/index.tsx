@@ -28,7 +28,6 @@ const EditModelEquipment = () => {
     navigate("/admin", {
       state: -1
     })
-    window.location.reload()
   };
 
   let token = localStorage.getItem("authToken") || "";
