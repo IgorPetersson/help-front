@@ -109,6 +109,7 @@ export const EquipmentProvider = ({ children }: IEquipmentProvider) => {
       const x = equipments.filter((eq) => eq.id != equipmentId)
       x.push(res.data)
       setEquipments(x)
+      setControl(!control)
     });
 
   };
