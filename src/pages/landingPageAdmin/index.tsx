@@ -18,11 +18,11 @@ const LandPageAdmin = () => {
   dateA.setDate(dateA.getDate() - 30);
   
   const [endDate, setEndDate] = useState(
-    new Date().toLocaleDateString("en-CA")
+    new Date().toLocaleDateString("en-GB")
   );
 
   const [initDate, setInitDate] = useState(
-    dateA.toLocaleDateString("en-CA")
+    dateA.toLocaleDateString("en-GB")
   );
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const LandPageAdmin = () => {
                   <label htmlFor="startDate">De:</label>
                   <input
                     value={initDate}
-                    type="date"
+                    type="text"
                     className="form-control"
                     id="startDate"
                     onChange={(e) => {
@@ -126,7 +126,7 @@ const LandPageAdmin = () => {
                   <label htmlFor="endDate">Até:</label>
                   <input
                     value={endDate}
-                    type="date"
+                    type="text"
                     className="form-control"
                     id="endDate"
                     onChange={(e) => {
