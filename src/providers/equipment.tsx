@@ -106,7 +106,7 @@ export const EquipmentProvider = ({ children }: IEquipmentProvider) => {
     api.patch(`/equipments/${equipmentId}`, data,{
       headers: { Authorization: `Bearer ${token}` },
     }).then((res) => {
-      const x = equipments.filter((eq) => eq.id == equipmentId)
+      const x = equipments.filter((eq) => eq.id != equipmentId)
       x.push(res.data)
       setEquipments(x)
     });
