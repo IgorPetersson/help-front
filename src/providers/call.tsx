@@ -94,6 +94,7 @@ export const CallsProvider = ({ children }: ICallProvider) => {
     development: [],
     attendance: [],
   });
+  const [control, setControl] = useState(false)
 
   let token = "";
   if (typeof window !== "undefined") {
@@ -112,13 +113,14 @@ export const CallsProvider = ({ children }: ICallProvider) => {
 
   useEffect(() => {
     listCall();
-  }, []);
+  }, [control]);
 
   const createCall = (data: ICallCreate) => {
     api
       .post("/calls", data, { headers: { Authorization: `Bearer ${token}` } })
       .then((resp) => {
         setCalls([...calls, resp.data]);
+        setControl(!control)
       });
   };
 
