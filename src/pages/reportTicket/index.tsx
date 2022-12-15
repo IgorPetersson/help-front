@@ -59,7 +59,7 @@ export const ReportTicket = () => {
       ).toLocaleDateString("en-CA");
 
       const xDate = new Date(eDate)
-      xDate.setDate(xDate.getDate() + 1)
+      xDate.setDate(xDate.getDate() + 2)
 
       
       console.log("I -> ", iDate)
