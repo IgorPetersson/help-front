@@ -84,7 +84,7 @@ export const EquipmentModelProvider = ({
     api.post("/models", data, {
       headers: { Authorization: `Bearer ${token}` },
     }).then((res) => {
-      const x = equipmentModels
+      const x = JSON.parse(JSON.stringify(equipmentModels))
       x.push(res.data)
       setEquipmentModels(x)
     }) ;
