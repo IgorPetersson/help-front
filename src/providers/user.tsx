@@ -95,7 +95,6 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         const user: IUser = jwtDecode(response.data.accessToken)
         localStorage.setItem("user", JSON.stringify(user))
         localStorage.setItem("authToken", response.data.accessToken);
-        console.log("USER TOKEN ", user)
         setIsLogged(true);
         setUserLogged({email: user.email, firtsName: user.firstName, id: parseInt(user.id)})
         if(user.admin == true){
