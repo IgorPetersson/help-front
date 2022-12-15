@@ -26,7 +26,7 @@ const EditModelEquipment = () => {
 
     updateEquipmentModel(parseInt(id as string), data);
     navigate("/admin", {
-      state: -1
+      state: -2
     })
   };
 
