@@ -203,7 +203,7 @@ const CreateTicket = () => {
                       type="text"
                       name="title"
                       placeholder="Assunto"
-                      value={currentDate}
+                      value={currentDate.toLocaleDateString("en-GB")}
                       disabled
                     />
                   </Col>
