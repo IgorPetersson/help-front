@@ -83,7 +83,11 @@ export const EquipmentModelProvider = ({
   const createEquipmentModel = (data: IEquipmentModelCreate) => {
     api.post("/models", data, {
       headers: { Authorization: `Bearer ${token}` },
-    });
+    }).then((res) => {
+      const x = equipmentModels
+      x.push(res.data)
+      setEquipmentModels(x)
+    }) ;
   };
 
   const getOneEquipmentModel = (equipmentModelId: number) => {
@@ -104,7 +108,7 @@ export const EquipmentModelProvider = ({
   ) => {
     api.patch(`/models/${equipmentModelId}`, data, {
       headers: { Authorization: `Bearer ${token}` },
-    });
+    }).then((x) => console.log("Models -> ", x.data));
   };
 
   return (
