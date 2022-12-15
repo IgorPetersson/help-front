@@ -70,7 +70,10 @@ export const ReportTicket = () => {
       setShow(true);
       }catch{
         console.log("Erro no relatório")
+        setShow(false)
       }
+    }else{
+      setShow(false)
     }
   };
 
@@ -152,7 +155,7 @@ export const ReportTicket = () => {
                 onChange={(e) => setEnd(e.target.value)}
               />
             </div>
-            <button onClick={onReport}>Gerar relatório</button>
+            <button style={{marginLeft: "10px"}} onClick={onReport}>Gerar relatório</button>
           </div>
         </div>
 
