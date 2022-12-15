@@ -190,8 +190,8 @@ export const ReportTicket = () => {
                       {grupyCall(reports?.secretary).map((report) => (
                         <tr>
                           <td style={{ width: "360px" }}>{report.name}</td>
-                          <td>{report.open}</td>
                           <td>{report.close}</td>
+                          <td>{report.open}</td>
                           <td>{report.total}</td>
                         </tr>
                       ))}
@@ -203,14 +203,14 @@ export const ReportTicket = () => {
                         <th>
                           {
                             reports?.secretary.filter(
-                              (r) => r.status == "opening"
+                              (r) => r.status == "close"
                             ).length
                           }
                         </th>
                         <th>
                           {
                             reports?.secretary.filter(
-                              (r) => r.status == "closed"
+                              (r) => r.status == "opening"
                             ).length
                           }
                         </th>
@@ -244,8 +244,8 @@ export const ReportTicket = () => {
                       {grupyCall(reports?.attendance).map((report) => (
                         <tr>
                           <td style={{ width: "360px" }}>{report.name}</td>
-                          <td>{report.open}</td>
                           <td>{report.close}</td>
+                          <td>{report.open}</td>
                           <td>{report.total}</td>
                         </tr>
                       ))}
@@ -257,14 +257,14 @@ export const ReportTicket = () => {
                         <th>
                           {
                             reports?.attendance.filter(
-                              (r) => r.status == "opening"
+                              (r) => r.status == "closed"
                             ).length
                           }
                         </th>
                         <th>
                           {
                             reports?.attendance.filter(
-                              (r) => r.status == "closed"
+                              (r) => r.status == "opening"
                             ).length
                           }
                         </th>
@@ -298,8 +298,8 @@ export const ReportTicket = () => {
                       {grupyCall(reports?.development).map((report) => (
                         <tr>
                           <td style={{ width: "360px" }}>{report.name}</td>
-                          <td>{report.open}</td>
                           <td>{report.close}</td>
+                          <td>{report.open}</td>
                           <td>{report.total}</td>
                         </tr>
                       ))}
@@ -311,14 +311,14 @@ export const ReportTicket = () => {
                         <th>
                           {
                             reports?.development.filter(
-                              (r) => r.status == "opening"
+                              (r) => r.status == "closed"
                             ).length
                           }
                         </th>
                         <th>
                           {
                             reports?.development.filter(
-                              (r) => r.status == "closed"
+                              (r) => r.status == "opening"
                             ).length
                           }
                         </th>
