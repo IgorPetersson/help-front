@@ -45,7 +45,7 @@ const LandingPageModelEquipment = () => {
   const actionDelete = (id: number) => {
     deleteEquipmentModel(id)
 
-    const newModels = equipmentModels.filter((eq) => eq.id == id)
+    const newModels = equipmentModels.filter((eq) => eq.id != id)
     setEquipmentModels(newModels)
   }
 

@@ -20,7 +20,7 @@ const EditEquipment = () => {
   const { id } = useParams();
 
   const { equipments, updateEquipment, getOneEquipment } = useContext(EquipmentContext);
-  const {equipmentModels} = useContext(EquipmentModelContext)
+  const {equipmentModels, listEquipmentModels} = useContext(EquipmentModelContext)
   const navigate = useNavigate()
 
   const equipmentId = parseInt(id as string)
@@ -39,6 +39,7 @@ const EditEquipment = () => {
       setName(res.data.name as string)
       setCode(res.data.code as string)
     });
+    listEquipmentModels()
   }, []);
 
   const user = JSON.parse(localStorage.getItem("user") || "{admin: false, email: ''}")

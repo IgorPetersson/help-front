@@ -25,6 +25,9 @@ const CreateModelEquipment = () => {
     setDescription("")
 
     createEquipmentModel(data);
+    navigate("/", {
+      state: -1
+    });
   };
 
   const navigate = useNavigate();
