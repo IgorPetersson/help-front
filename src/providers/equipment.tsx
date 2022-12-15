@@ -89,7 +89,10 @@ export const EquipmentProvider = ({ children }: IEquipmentProvider) => {
   const deleteEquipment= (equipmentId: number) => {
     api.delete(`/equipments/${equipmentId}`, {
       headers: { Authorization: `Bearer ${token}` },
-    });
+    }).then((res) => {
+      const x = equipments.filter((eq) => eq.id != equipmentId)
+      setEquipments(x)
+    } );
   };
 
   const updateEquipment= (equipmentId: number, data: IEquipmentUpdate) => {
