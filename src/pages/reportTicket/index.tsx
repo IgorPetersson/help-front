@@ -1,4 +1,3 @@
-
 import { useContext, useState } from "react";
 import { Col, Row, Table } from "react-bootstrap";
 import { Footer } from "../../components/Footer";
@@ -37,16 +36,35 @@ export const ReportTicket = () => {
     development: [],
     attendance: [],
   });
-  console.log("Repo -> ", reports);
 
   const [end, setEnd] = useState("");
   const [start, setStart] = useState("");
   const [show, setShow] = useState(false);
 
   const onReport = async () => {
-    const result = await createReport(start, end);
-    setReports(result);
-    setShow(true);
+    if (start.length == 10 && end.length == 10 && end[2] == "/" && end[5] == "/" && start[2] == "/" && start[5] == "/") {
+      try{
+      const initDate = start.split("/");
+      const endDate = end.split("/");
+
+      const iDate = new Date(
+        parseInt(initDate[2]),
+        parseInt(initDate[1]),
+        parseInt(initDate[0])
+      ).toLocaleDateString("en-CA");
+      const eDate = new Date(
+        parseInt(endDate[2]),
+        parseInt(endDate[1]),
+        parseInt(endDate[0])
+      ).toLocaleDateString("en-CA");
+
+      const result = await createReport(iDate, eDate);
+      setReports(result);
+      setShow(true);
+      }catch{
+        console.log("Erro no relatório")
+      }
+    }
   };
 
   interface IResult {
@@ -100,9 +118,10 @@ export const ReportTicket = () => {
             >
               <label htmlFor="startDate">De:</label>
               <input
-                type="date"
+                type="text"
                 value={start}
                 className="form-control"
+                placeholder="dd/mm/aaaa"
                 id="startDate"
                 onChange={(e) => setStart(e.target.value)}
               />
@@ -116,10 +135,11 @@ export const ReportTicket = () => {
             >
               <label htmlFor="endDate">Até:</label>
               <input
-                type="date"
+                type="text"
                 value={end}
                 className="form-control"
                 id="endDate"
+                placeholder="dd/mm/aaaa"
                 onChange={(e) => setEnd(e.target.value)}
               />
             </div>
@@ -157,9 +177,7 @@ export const ReportTicket = () => {
                     <tbody>
                       {grupyCall(reports?.secretary).map((report) => (
                         <tr>
-                          <td style={{ width: "360px" }}>
-                            {report.name}
-                          </td>
+                          <td style={{ width: "360px" }}>{report.name}</td>
                           <td>{report.open}</td>
                           <td>{report.close}</td>
                           <td>{report.total}</td>
@@ -213,7 +231,7 @@ export const ReportTicket = () => {
                     <tbody>
                       {grupyCall(reports?.attendance).map((report) => (
                         <tr>
-                          <td style={{width: "360px"}}>{report.name}</td>
+                          <td style={{ width: "360px" }}>{report.name}</td>
                           <td>{report.open}</td>
                           <td>{report.close}</td>
                           <td>{report.total}</td>
@@ -267,7 +285,7 @@ export const ReportTicket = () => {
                     <tbody>
                       {grupyCall(reports?.development).map((report) => (
                         <tr>
-                          <td style={{width: "360px"}}>{report.name}</td>
+                          <td style={{ width: "360px" }}>{report.name}</td>
                           <td>{report.open}</td>
                           <td>{report.close}</td>
                           <td>{report.total}</td>
