@@ -61,7 +61,10 @@ export const ReportTicket = () => {
       console.log("I -> ", iDate)
       console.log("E -> ", eDate)
 
-      const result = await createReport(iDate, eDate);
+      const xDate = new Date(eDate)
+      xDate.setDate(xDate.getDate() - 1)
+
+      const result = await createReport(iDate, xDate.toLocaleDateString("en-CA"));
       setReports(result);
       setShow(true);
       }catch{
@@ -117,6 +120,7 @@ export const ReportTicket = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                marginLeft: "10px"
               }}
             >
               <label htmlFor="startDate">De:</label>
@@ -134,6 +138,7 @@ export const ReportTicket = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                marginLeft: "10px"
               }}
             >
               <label htmlFor="endDate">Até:</label>
