@@ -69,7 +69,6 @@ const LandingPageTicket = () => {
 
   const updateCallUser = (id: number) => {
     updateCall(id)
-    window.location.reload()
   }
 
   return (
