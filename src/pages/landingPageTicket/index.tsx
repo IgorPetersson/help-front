@@ -134,7 +134,7 @@ const LandingPageTicket = () => {
                   <td>{ticket.equipmentName}</td>
                   <td>
                     {" "}
-                    {ticket.date && new Date(ticket.date).toLocaleDateString()}
+                    {ticket.date && new Date(ticket.date).toLocaleDateString("en-GB")}
                   </td>
                   <td>{ticket.status == "opening" ? "Chamado Aberto": "Chamado Encerrado"}</td>
 

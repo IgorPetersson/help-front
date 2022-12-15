@@ -163,7 +163,7 @@ const LandPageAdmin = () => {
                           <td>
                             {" "}
                             {ticket.date &&
-                              new Date(ticket.date).toLocaleDateString()}
+                              new Date(ticket.date).toLocaleDateString("en-GB")}
                           </td>
                           <td>
                             {ticket.status == "opening"
